@@ -5,17 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>me.hsgamer.bettergui</groupId>
-  <artifactId>ExampleAddon</artifactId>
+  <artifactId>ASCII-Placeholders</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>ExampleAddon</name>
-  <description>An Example addon for BetterGUI</description>
+  <name>ASCII-Placeholders</name>
+  <description>Add complex texts as placeholders</description>
 
   <properties>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.mainClass>me.hsgamer.bettergui.exampleaddon.ExampleAddon</project.mainClass>
+    <project.mainClass>me.hsgamer.bettergui.asciiplaceholders.Main</project.mainClass>
   </properties>
 
   <build>
@@ -64,10 +64,10 @@
       <id>sonatype</id>
       <url>https://oss.sonatype.org/content/groups/public/</url>
     </repository>
-    <repository>
-      <id>codemc-snapshots</id>
-      <url>https://repo.codemc.io/repository/maven-snapshots/</url>
-    </repository>
+<!--    <repository>-->
+<!--      <id>codemc-snapshots</id>-->
+<!--      <url>https://repo.codemc.io/repository/maven-snapshots/</url>-->
+<!--    </repository>-->
   </repositories>
 
   <dependencies>
@@ -80,7 +80,7 @@
     <dependency>
       <groupId>me.HSGamer</groupId>
       <artifactId>BetterGUI</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
