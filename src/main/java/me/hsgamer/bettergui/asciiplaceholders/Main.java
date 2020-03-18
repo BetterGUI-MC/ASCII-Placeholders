@@ -7,7 +7,6 @@ import me.hsgamer.bettergui.manager.VariableManager;
 import me.hsgamer.bettergui.object.addon.Addon;
 import me.hsgamer.bettergui.util.CommonUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public final class Main extends Addon {
 
@@ -26,10 +25,20 @@ public final class Main extends Addon {
 
   @Override
   public void onEnable() {
-    FileConfiguration configuration = getConfig();
-    configuration.getValues(false).forEach((string, object) ->
+    registerASCII();
+    VariableManager.register("ascii_", ((player, s) -> placeholders.getOrDefault(s, null)));
+  }
+
+  @Override
+  public void onReload() {
+    placeholders.clear();
+    reloadConfig();
+    registerASCII();
+  }
+
+  private void registerASCII() {
+    getConfig().getValues(false).forEach((string, object) ->
         placeholders.put(string,
             CommonUtils.colorize(StringEscapeUtils.unescapeJava(String.valueOf(object)))));
-    VariableManager.register("ascii_", ((player, s) -> placeholders.getOrDefault(s, null)));
   }
 }
