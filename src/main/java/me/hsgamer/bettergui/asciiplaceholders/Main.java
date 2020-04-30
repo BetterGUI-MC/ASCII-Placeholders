@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import me.hsgamer.bettergui.manager.VariableManager;
 import me.hsgamer.bettergui.object.addon.Addon;
 import me.hsgamer.bettergui.util.CommonUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 
 public final class Main extends Addon {
 
