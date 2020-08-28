@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import me.hsgamer.bettergui.manager.VariableManager;
 import me.hsgamer.bettergui.object.addon.Addon;
-import me.hsgamer.bettergui.util.CommonUtils;
+import me.hsgamer.bettergui.util.MessageUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 
 public final class Main extends Addon {
@@ -39,6 +39,6 @@ public final class Main extends Addon {
   private void registerASCII() {
     getConfig().getValues(false).forEach((string, object) ->
         placeholders.put(string,
-            CommonUtils.colorize(StringEscapeUtils.unescapeJava(String.valueOf(object)))));
+            MessageUtils.colorize(StringEscapeUtils.unescapeJava(String.valueOf(object)))));
   }
 }
