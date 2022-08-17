@@ -1,16 +1,20 @@
 package me.hsgamer.bettergui.asciiplaceholders;
 
-import me.hsgamer.bettergui.api.addon.BetterGUIAddon;
-import me.hsgamer.bettergui.lib.core.variable.VariableManager;
+import me.hsgamer.hscore.bukkit.addon.PluginAddon;
+import me.hsgamer.hscore.bukkit.config.BukkitConfig;
+import me.hsgamer.hscore.config.Config;
+import me.hsgamer.hscore.variable.VariableManager;
 import org.apache.commons.lang.StringEscapeUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-public final class Main extends BetterGUIAddon {
+public final class Main extends PluginAddon {
 
     private static final Map<String, String> placeholders = new HashMap<>();
+    private final Config config = new BukkitConfig(new File(getDataFolder(), "config.yml"));
 
     @Override
     public boolean onLoad() {
@@ -32,11 +36,11 @@ public final class Main extends BetterGUIAddon {
     @Override
     public void onReload() {
         placeholders.clear();
-        reloadConfig();
+        config.reload();
         registerASCII();
     }
 
     private void registerASCII() {
-        getConfig().getValues(false).forEach((string, object) -> placeholders.put(string, StringEscapeUtils.unescapeJava(String.valueOf(object))));
+        config.getValues(false).forEach((string, object) -> placeholders.put(string, StringEscapeUtils.unescapeJava(String.valueOf(object))));
     }
 }
