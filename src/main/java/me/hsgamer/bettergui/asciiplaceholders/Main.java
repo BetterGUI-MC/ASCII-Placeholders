@@ -29,6 +29,7 @@ public final class Main extends PluginAddon {
 
     @Override
     public void onEnable() {
+        config.setup();
         registerASCII();
         VariableManager.register("ascii_", (original, uuid) -> placeholders.get(original));
     }
