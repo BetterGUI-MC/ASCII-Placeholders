@@ -1,9 +1,13 @@
 package me.hsgamer.bettergui.asciiplaceholders;
 
-import me.hsgamer.hscore.bukkit.addon.PluginAddon;
+import me.hsgamer.bettergui.api.addon.GetPlugin;
+import me.hsgamer.bettergui.api.addon.Reloadable;
 import me.hsgamer.hscore.bukkit.config.BukkitConfig;
 import me.hsgamer.hscore.config.Config;
-import me.hsgamer.hscore.variable.VariableManager;
+import me.hsgamer.hscore.config.PathString;
+import me.hsgamer.hscore.expansion.common.Expansion;
+import me.hsgamer.hscore.expansion.extra.expansion.DataFolder;
+import me.hsgamer.hscore.variable.VariableBundle;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import java.io.File;
@@ -11,10 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-public final class Main extends PluginAddon {
+public final class Main implements Expansion, DataFolder, GetPlugin, Reloadable {
 
     private static final Map<String, String> placeholders = new HashMap<>();
     private final Config config = new BukkitConfig(new File(getDataFolder(), "config.yml"));
+    private final VariableBundle variableBundle = new VariableBundle();
 
     @Override
     public boolean onLoad() {
@@ -31,7 +36,7 @@ public final class Main extends PluginAddon {
     public void onEnable() {
         config.setup();
         registerASCII();
-        VariableManager.register("ascii_", (original, uuid) -> placeholders.get(original));
+        variableBundle.register("ascii_", placeholders::get);
     }
 
     @Override
@@ -41,7 +46,12 @@ public final class Main extends PluginAddon {
         registerASCII();
     }
 
+    @Override
+    public void onDisable() {
+        variableBundle.unregisterAll();
+    }
+
     private void registerASCII() {
-        config.getValues(false).forEach((string, object) -> placeholders.put(string, StringEscapeUtils.unescapeJava(String.valueOf(object))));
+        config.getValues(false).forEach((string, object) -> placeholders.put(PathString.toPath(string), StringEscapeUtils.unescapeJava(String.valueOf(object))));
     }
 }
