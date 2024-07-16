@@ -52,6 +52,6 @@ public final class Main implements Expansion, DataFolder, GetPlugin, Reloadable 
     }
 
     private void registerASCII() {
-        config.getValues(false).forEach((string, object) -> placeholders.put(PathString.toPath(string), StringEscapeUtils.unescapeJava(String.valueOf(object))));
+        config.getNormalizedValues(false).forEach((string, object) -> placeholders.put(PathString.joinDefault(string), StringEscapeUtils.unescapeJava(String.valueOf(object))));
     }
 }
